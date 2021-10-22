@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/xandout/assemblyai-client/transcript"
+	"github.com/getdebrief/assemblyai-client/transcript"
 )
 
 const (

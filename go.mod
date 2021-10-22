@@ -1,4 +1,4 @@
-module github.com/xandout/assemblyai-client
+module github.com/getdebrief/assemblyai-client
 
 go 1.14
 
