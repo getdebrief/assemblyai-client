@@ -54,14 +54,14 @@ func main() {
         transcript.WithSpeakerLabels(),
     )
     started, err := api.StartTranscript(*tr)
-	if err != nil {
-		log.Fatal(err)
+		if err != nil {
+			log.Fatal(err)
     }
     
     time.Sleep(30 * time.Second)
     finished, err := api.GetTranscript(started.ID)
-	if err != nil {
-		log.Fatal(err)
+		if err != nil {
+			log.Fatal(err)
     }
     
     fmt.Println(string(finished.Bytes()))
