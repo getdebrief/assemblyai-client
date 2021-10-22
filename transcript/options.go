@@ -72,3 +72,21 @@ func WithAudioEndAt(endAt int64) Option {
 		h.AudioEndAt = endAt
 	}
 }
+
+func WithWordBoost(words []string) Option {
+	return func(h *Request) {
+		h.WordBoost = words
+	}
+}
+
+func WithBoostParam(boost BoostParamType) Option {
+	return func(h *Request) {
+		h.BoostParam = boost
+	}
+}
+
+func WithAutoHighlights() Option {
+	return func(h *Request) {
+		h.AutoHighlights = true
+	}
+}
