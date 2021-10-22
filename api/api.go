@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"time"
 
@@ -25,6 +26,10 @@ type AssemblyAIClient struct {
 	apiKey     string
 }
 
+type UploadResponse struct {
+	UploadUrl string `json:"upload_url"`
+}
+
 // NewClient creates a new API client using your API key
 func NewClient(apiKey string) *AssemblyAIClient {
 	return &AssemblyAIClient{
@@ -36,7 +41,7 @@ func NewClient(apiKey string) *AssemblyAIClient {
 	}
 }
 
-func (c *AssemblyAIClient) sendRequest(req *http.Request, v *transcript.Response) error {
+func (c *AssemblyAIClient) sendRequest(req *http.Request, v interface{}) error {
 	req.Header.Set("Content-Type", "application/json; charset=utf-8")
 	req.Header.Set("Accept", "application/json; charset=utf-8")
 	req.Header.Set("Authorization", c.apiKey)
@@ -84,7 +89,6 @@ func (c *AssemblyAIClient) StartTranscript(tr transcript.Request) (transcript.Re
 func (c *AssemblyAIClient) GetTranscript(transcriptID string) (transcript.Response, error) {
 	ctr := transcript.Response{}
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/transcript/%s", c.BaseURL, transcriptID), nil)
-
 	if err != nil {
 		return ctr, err
 	}
@@ -95,4 +99,25 @@ func (c *AssemblyAIClient) GetTranscript(transcriptID string) (transcript.Respon
 	}
 
 	return ctr, nil
+}
+
+func (c *AssemblyAIClient) UploadFile(filepath string) (string, error) {
+	resp := UploadResponse{}
+	// TODO load file
+	fileBytes, err := ioutil.ReadFile(filepath)
+	if err != nil {
+		return "", err
+	}
+	// pass it into where nil is rn
+	req, err := http.NewRequest("POST", fmt.Sprintf("%s/upload", c.BaseURL), bytes.NewBuffer(fileBytes))
+	if err != nil {
+		return "", err
+	}
+
+	err = c.sendRequest(req, &resp)
+	if err != nil {
+		return "", err
+	}
+
+	return resp.UploadUrl, nil
 }

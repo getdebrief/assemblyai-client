@@ -40,3 +40,6 @@
 # My main
 main.go
 .env
+
+# testing files
+*.ogg
