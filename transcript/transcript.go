@@ -31,11 +31,16 @@ type Request struct {
 	BoostParam     BoostParamType `json:"boost_param,omitempty"`
 }
 
+type Timestamp struct {
+	Start int64 `json:"start"`
+	End   int64 `json:"end"`
+}
+
 type AutoHighlight struct {
-	Count     int           `json:"count"`
-	Rank      float64       `json:"rank"`
-	Text      string        `json:"text"`
-	Timestamp []interface{} `json:"timestamp"`
+	Count     int         `json:"count"`
+	Rank      float64     `json:"rank"`
+	Text      string      `json:"text"`
+	Timestamp []Timestamp `json:"timestamp"`
 }
 
 type AutoHighlightsResponse struct {

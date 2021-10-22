@@ -36,7 +36,7 @@ func NewClient(apiKey string) *AssemblyAIClient {
 	}
 }
 
-func (c *AssemblyAIClient) sendRequest(req *http.Request, v interface{}) error {
+func (c *AssemblyAIClient) sendRequest(req *http.Request, v *transcript.Response) error {
 	req.Header.Set("Content-Type", "application/json; charset=utf-8")
 	req.Header.Set("Accept", "application/json; charset=utf-8")
 	req.Header.Set("Authorization", c.apiKey)
