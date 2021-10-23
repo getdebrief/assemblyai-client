@@ -29,8 +29,6 @@ This is a golang client for the [AssemblyAI API](https://docs.assemblyai.com/ove
     - `webhook_url`
     - `audio_start_from`
     - `audio_end_at`
-
-* options yet to be covered
 		- `word_boost`
 		- `boost_param`
 		- `auto_highlights`
@@ -38,36 +36,54 @@ This is a golang client for the [AssemblyAI API](https://docs.assemblyai.com/ove
 ## Usage
 
 ```go
-import (
-    "time"
-    "fmt"
-    "log"
+package main
 
-    "github.com/xandout/assemblyai-client/api"
-	"github.com/xandout/assemblyai-client/transcript"
+import (
+	"fmt"
+	"log"
+	"time"
+
+	"github.com/getdebrief/assemblyai-client/api"
+	"github.com/getdebrief/assemblyai-client/transcript"
 )
 
 func main() {
-    api := api.NewClient("YOUR-API-KEY")
-    tr := transcript.NewRequest(
-        transcript.WithAudioURL("https://you-audio-file-host.com/your-file.mp3"), 
-        transcript.WithSpeakerLabels(),
-    )
-    started, err := api.StartTranscript(*tr)
-		if err != nil {
-			log.Fatal(err)
-    }
-    
-    time.Sleep(30 * time.Second)
-    finished, err := api.GetTranscript(started.ID)
-		if err != nil {
-			log.Fatal(err)
-    }
-    
-    fmt.Println(string(finished.Bytes()))
-}
-```
+	api := api.NewClient("API KEY")
 
+	audioURL, err := api.UploadFile("FILEPATH")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	tr := transcript.NewRequest(
+		transcript.WithAudioURL(audioURL),
+		transcript.WithSpeakerLabels(),
+		transcript.WithAutoHighlights(),
+		transcript.WithWordBoost([]string{"Word"}),
+		transcript.WithBoostParam(transcript.BoostParamHigh),
+	)
+
+	started, err := api.StartTranscript(*tr)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var finished transcript.Response
+	processing := true
+	for processing {
+		time.Sleep(30 * time.Second)
+		finished, err = api.GetTranscript(started.ID)
+		if err != nil {
+			log.Fatal(err)
+		} else if finished.Status != "processing" {
+			processing = false
+		}
+	}
+
+	fmt.Println(string(finished.Bytes()))
+}
+
+```
 
 ```json
 {
