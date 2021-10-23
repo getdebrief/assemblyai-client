@@ -29,9 +29,9 @@ This is a golang client for the [AssemblyAI API](https://docs.assemblyai.com/ove
     - `webhook_url`
     - `audio_start_from`
     - `audio_end_at`
-		- `word_boost`
-		- `boost_param`
-		- `auto_highlights`
+    - `word_boost`
+    - `boost_param`
+    - `auto_highlights`
 
 ## Usage
 
