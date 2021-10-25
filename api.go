@@ -99,9 +99,9 @@ func (c *AssemblyAIClient) GetTranscript(transcriptID string) (Response, error) 
 	return ctr, nil
 }
 
+// UploadFile uploads a local file to Assembly.ai
 func (c *AssemblyAIClient) UploadFile(filepath string) (string, error) {
 	resp := UploadResponse{}
-	// TODO load file
 	fileBytes, err := ioutil.ReadFile(filepath)
 	if err != nil {
 		return "", err
