@@ -1,4 +1,4 @@
-package api
+package assemblyai
 
 import (
 	"bytes"
@@ -8,8 +8,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"time"
-
-	"github.com/getdebrief/assemblyai-client/transcript"
 )
 
 const (
@@ -69,8 +67,8 @@ func (c *AssemblyAIClient) sendRequest(req *http.Request, v interface{}) error {
 }
 
 // StartTranscript submits the API request to start transcribing a file
-func (c *AssemblyAIClient) StartTranscript(tr transcript.Request) (transcript.Response, error) {
-	ctr := transcript.Response{}
+func (c *AssemblyAIClient) StartTranscript(tr Request) (Response, error) {
+	ctr := Response{}
 	req, err := http.NewRequest("POST", fmt.Sprintf("%s/transcript", c.BaseURL), bytes.NewBuffer(tr.Bytes()))
 
 	if err != nil {
@@ -86,8 +84,8 @@ func (c *AssemblyAIClient) StartTranscript(tr transcript.Request) (transcript.Re
 }
 
 // GetTranscript submits the API request to start transcribing a file
-func (c *AssemblyAIClient) GetTranscript(transcriptID string) (transcript.Response, error) {
-	ctr := transcript.Response{}
+func (c *AssemblyAIClient) GetTranscript(transcriptID string) (Response, error) {
+	ctr := Response{}
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/transcript/%s", c.BaseURL, transcriptID), nil)
 	if err != nil {
 		return ctr, err

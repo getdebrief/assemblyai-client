@@ -1,4 +1,4 @@
-package webhook
+package assemblyai
 
 // Body is the data assembly calls the webhook with
 type Body struct {

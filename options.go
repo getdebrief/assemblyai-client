@@ -1,4 +1,4 @@
-package transcript
+package assemblyai
 
 // Option sets options on the Request
 type Option func(*Request)

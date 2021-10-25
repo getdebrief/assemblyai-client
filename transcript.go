@@ -1,4 +1,4 @@
-package transcript
+package assemblyai
 
 import (
 	"bytes"
