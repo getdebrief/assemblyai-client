@@ -43,3 +43,4 @@ main.go
 
 # testing files
 *.ogg
+tests/*
