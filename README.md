@@ -6,6 +6,10 @@ This is a golang client for the [AssemblyAI API](https://docs.assemblyai.com/ove
 
 ## Version history
 
+### v0.0.3
+* Typed all untyped responses
+* added functionality for `word_boost`, `iab_categories` and `auto_highlights`
+
 ### v0.0.2
 * Renamed `Transcript` to `Request`
 * Added `Reader` method on `Request` and `Response` to aid downstream users
@@ -32,6 +36,7 @@ This is a golang client for the [AssemblyAI API](https://docs.assemblyai.com/ove
     - `word_boost`
     - `boost_param`
     - `auto_highlights`
+    - `iab_categories`
 
 ## Usage
 

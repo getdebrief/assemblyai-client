@@ -90,3 +90,9 @@ func WithAutoHighlights() Option {
 		h.AutoHighlights = true
 	}
 }
+
+func WithIABCategories() Option {
+	return func(h *Request) {
+		h.IABCategories = true
+	}
+}

@@ -29,11 +29,35 @@ type Request struct {
 	AutoHighlights bool           `json:"auto_highlights,omitempty"`
 	WordBoost      []string       `json:"word_boost,omitempty"`
 	BoostParam     BoostParamType `json:"boost_param,omitempty"`
+	IABCategories  bool           `json:"iab_categories,omitempty"`
 }
 
 type Timestamp struct {
 	Start int64 `json:"start"`
 	End   int64 `json:"end"`
+}
+
+type IABStatus string
+
+const (
+	IABSuccess     IABStatus = "success"
+	IABUnavailable IABStatus = "unavailable"
+)
+
+type IABLabel struct {
+	Relevance float64 `json:"relevance"`
+	Label     string  `json:"label"`
+}
+
+type IABResult struct {
+	Text      string      `json:"text"`
+	Timestamp []Timestamp `json:"timestamp"`
+	Labels    []IABLabel  `json:"labels"`
+}
+
+type IABCatResponse struct {
+	Status  IABStatus   `json:"status"`
+	Results []IABResult `json:"results"`
 }
 
 type AutoHighlight struct {
@@ -84,6 +108,7 @@ type Response struct {
 	WebhookURL           string                 `json:"webhook_url,omitempty"`
 	Words                []Word                 `json:"words,omitempty"`
 	AutoHighlightsResult AutoHighlightsResponse `json:"auto_highlights_result,omitempty"`
+	IABCategoriesResult  IABCatResponse         `json:"iab_categories_result,omitempty"`
 }
 
 // Reader returns a bytes.Reader from Request
