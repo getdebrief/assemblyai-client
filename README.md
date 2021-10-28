@@ -6,6 +6,13 @@ This is a golang client for the [AssemblyAI API](https://docs.assemblyai.com/ove
 
 ## Version history
 
+### v0.0.5
+* fixed bug where `iab_categories` timestamp object was of the wrong type
+* renamed webhook response type from `Body` to `WebhookResponse` for clarity
+
+### v0.0.4
+* reorganized to put everything under one package for ease of import/naming, and easier use alongside other transcription services.
+
 ### v0.0.3
 * Typed all untyped responses
 * added functionality for `word_boost`, `iab_categories` and `auto_highlights`

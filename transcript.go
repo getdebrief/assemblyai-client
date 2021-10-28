@@ -50,9 +50,9 @@ type IABLabel struct {
 }
 
 type IABResult struct {
-	Text      string      `json:"text"`
-	Timestamp []Timestamp `json:"timestamp"`
-	Labels    []IABLabel  `json:"labels"`
+	Text      string     `json:"text"`
+	Timestamp Timestamp  `json:"timestamp"`
+	Labels    []IABLabel `json:"labels"`
 }
 
 type IABCatResponse struct {
