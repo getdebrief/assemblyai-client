@@ -61,10 +61,10 @@ type IABCatResponse struct {
 }
 
 type AutoHighlight struct {
-	Count     int         `json:"count"`
-	Rank      float64     `json:"rank"`
-	Text      string      `json:"text"`
-	Timestamp []Timestamp `json:"timestamp"`
+	Count      int         `json:"count"`
+	Rank       float64     `json:"rank"`
+	Text       string      `json:"text"`
+	Timestamps []Timestamp `json:"timestamps"`
 }
 
 type AutoHighlightsResponse struct {
