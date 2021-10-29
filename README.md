@@ -6,6 +6,9 @@ This is a golang client for the [AssemblyAI API](https://docs.assemblyai.com/ove
 
 ## Version history
 
+### v0.0.6
+* fixed bug where `AutoHighlight` objects did not grab timestamps
+
 ### v0.0.5
 * fixed bug where `iab_categories` timestamp object was of the wrong type
 * renamed webhook response type from `Body` to `WebhookResponse` for clarity
