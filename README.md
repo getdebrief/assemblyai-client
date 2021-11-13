@@ -2,7 +2,7 @@
 
 This is a golang client for the [AssemblyAI API](https://docs.assemblyai.com/overview/getting-started).
 
-> This library is new and mostly built for my own purposes.  Use at your own risk or submit a PR to improve :)
+> This library is forked from https://github.com/xandout/assemblyai-client as it had not been maintained with the new features from Assembly. We plan to keep this library used in production and maintained moving forward.
 
 ## Version history
 
