@@ -18,10 +18,16 @@ const (
 )
 
 // AssemblyAIClient is the client
-type AssemblyAIClient struct {
+type assemblyAIClient struct {
 	BaseURL    string
 	HTTPClient *http.Client
 	apiKey     string
+}
+
+type AssemblyAIClient interface {
+	StartTranscript(tr Request) (Response, error)
+	GetTranscript(transcriptID string) (Response, error)
+	UploadFile(filepath string) (string, error)
 }
 
 type UploadResponse struct {
@@ -29,8 +35,8 @@ type UploadResponse struct {
 }
 
 // NewClient creates a new API client using your API key
-func NewClient(apiKey string) *AssemblyAIClient {
-	return &AssemblyAIClient{
+func NewClient(apiKey string) AssemblyAIClient {
+	return &assemblyAIClient{
 		BaseURL: BaseURLV2,
 		apiKey:  apiKey,
 		HTTPClient: &http.Client{
@@ -39,7 +45,7 @@ func NewClient(apiKey string) *AssemblyAIClient {
 	}
 }
 
-func (c *AssemblyAIClient) sendRequest(req *http.Request, v interface{}) error {
+func (c *assemblyAIClient) sendRequest(req *http.Request, v interface{}) error {
 	req.Header.Set("Content-Type", "application/json; charset=utf-8")
 	req.Header.Set("Accept", "application/json; charset=utf-8")
 	req.Header.Set("Authorization", c.apiKey)
@@ -67,7 +73,7 @@ func (c *AssemblyAIClient) sendRequest(req *http.Request, v interface{}) error {
 }
 
 // StartTranscript submits the API request to start transcribing a file
-func (c *AssemblyAIClient) StartTranscript(tr Request) (Response, error) {
+func (c *assemblyAIClient) StartTranscript(tr Request) (Response, error) {
 	ctr := Response{}
 	req, err := http.NewRequest("POST", fmt.Sprintf("%s/transcript", c.BaseURL), bytes.NewBuffer(tr.Bytes()))
 
@@ -84,7 +90,7 @@ func (c *AssemblyAIClient) StartTranscript(tr Request) (Response, error) {
 }
 
 // GetTranscript submits the API request to start transcribing a file
-func (c *AssemblyAIClient) GetTranscript(transcriptID string) (Response, error) {
+func (c *assemblyAIClient) GetTranscript(transcriptID string) (Response, error) {
 	ctr := Response{}
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/transcript/%s", c.BaseURL, transcriptID), nil)
 	if err != nil {
@@ -100,7 +106,7 @@ func (c *AssemblyAIClient) GetTranscript(transcriptID string) (Response, error) 
 }
 
 // UploadFile uploads a local file to Assembly.ai
-func (c *AssemblyAIClient) UploadFile(filepath string) (string, error) {
+func (c *assemblyAIClient) UploadFile(filepath string) (string, error) {
 	resp := UploadResponse{}
 	fileBytes, err := ioutil.ReadFile(filepath)
 	if err != nil {
