@@ -102,3 +102,9 @@ func WithEntityDetection() Option {
 		h.EntityDetection = true
 	}
 }
+
+func WithAutoChapters() Option {
+	return func(h *Request) {
+		h.AutoChapters = true
+	}
+}

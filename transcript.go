@@ -31,6 +31,7 @@ type Request struct {
 	BoostParam      BoostParamType `json:"boost_param,omitempty"`
 	IABCategories   bool           `json:"iab_categories,omitempty"`
 	EntityDetection bool           `json:"entity_detection,omitempty"`
+	AutoChapters    bool           `json:"auto_chapters,omitempty"`
 }
 
 type Timestamp struct {
@@ -98,6 +99,13 @@ type EntityResponse struct {
 	EndMS   int    `json:"end"`
 }
 
+type AutoChapterResponse struct {
+	Summary  string `json:"summary"`
+	Headline string `json:"headline"`
+	StartMS  int    `json:"start"`
+	EndMS    int    `json:"end"`
+}
+
 // Response is the API response
 type Response struct {
 	AcousticModel        string                 `json:"acoustic_model,omitempty"`
@@ -119,6 +127,7 @@ type Response struct {
 	AutoHighlightsResult AutoHighlightsResponse `json:"auto_highlights_result,omitempty"`
 	IABCategoriesResult  IABCatResponse         `json:"iab_categories_result,omitempty"`
 	Entities             []EntityResponse       `json:"entities,omitempty"`
+	Chapters             []AutoChapterResponse  `json:"chapters,omitempty"`
 }
 
 // Reader returns a bytes.Reader from Request
