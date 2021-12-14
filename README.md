@@ -6,6 +6,9 @@ This is a golang client for the [AssemblyAI API](https://docs.assemblyai.com/ove
 
 ## Version history
 
+### v0.0.8
+* added support for the `auto_chapters` feature
+
 ### v0.0.7
 * added support for the `entity_detection` feature
 
