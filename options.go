@@ -96,3 +96,9 @@ func WithIABCategories() Option {
 		h.IABCategories = true
 	}
 }
+
+func WithEntityDetection() Option {
+	return func(h *Request) {
+		h.EntityDetection = true
+	}
+}

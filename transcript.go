@@ -16,20 +16,21 @@ const (
 
 // Request is the JSON body to pass to the API
 type Request struct {
-	AcousticModel  string         `json:"acoustic_model,omitempty"`
-	AudioEndAt     int64          `json:"audio_end_at,omitempty"`
-	AudioStartFrom int64          `json:"audio_start_from,omitempty"`
-	AudioURL       string         `json:"audio_url,omitempty"`
-	DualChannel    bool           `json:"dual_channel,omitempty"`
-	FormatText     bool           `json:"format_text,omitempty"`
-	LanguageModel  string         `json:"language_model,omitempty"`
-	Punctuate      bool           `json:"punctuate,omitempty"`
-	SpeakerLabels  bool           `json:"speaker_labels,omitempty"`
-	WebhookURL     string         `json:"webhook_url,omitempty"`
-	AutoHighlights bool           `json:"auto_highlights,omitempty"`
-	WordBoost      []string       `json:"word_boost,omitempty"`
-	BoostParam     BoostParamType `json:"boost_param,omitempty"`
-	IABCategories  bool           `json:"iab_categories,omitempty"`
+	AcousticModel   string         `json:"acoustic_model,omitempty"`
+	AudioEndAt      int64          `json:"audio_end_at,omitempty"`
+	AudioStartFrom  int64          `json:"audio_start_from,omitempty"`
+	AudioURL        string         `json:"audio_url,omitempty"`
+	DualChannel     bool           `json:"dual_channel,omitempty"`
+	FormatText      bool           `json:"format_text,omitempty"`
+	LanguageModel   string         `json:"language_model,omitempty"`
+	Punctuate       bool           `json:"punctuate,omitempty"`
+	SpeakerLabels   bool           `json:"speaker_labels,omitempty"`
+	WebhookURL      string         `json:"webhook_url,omitempty"`
+	AutoHighlights  bool           `json:"auto_highlights,omitempty"`
+	WordBoost       []string       `json:"word_boost,omitempty"`
+	BoostParam      BoostParamType `json:"boost_param,omitempty"`
+	IABCategories   bool           `json:"iab_categories,omitempty"`
+	EntityDetection bool           `json:"entitiy_detection,omitempty"`
 }
 
 type Timestamp struct {
@@ -58,6 +59,7 @@ type IABResult struct {
 type IABCatResponse struct {
 	Status  IABStatus   `json:"status"`
 	Results []IABResult `json:"results"`
+	Summary interface{} `json:"summary"` // Each category is its own item, so typing this is infeasable.
 }
 
 type AutoHighlight struct {
@@ -89,6 +91,13 @@ type Utterance struct {
 	Words      []Word  `json:"words"`
 }
 
+type EntityResponse struct {
+	Type    string `json:"entity_type"`
+	Text    string `json:"text"`
+	StartMS int    `json:"start"`
+	EndMS   int    `json:"end"`
+}
+
 // Response is the API response
 type Response struct {
 	AcousticModel        string                 `json:"acoustic_model,omitempty"`
@@ -109,6 +118,7 @@ type Response struct {
 	Words                []Word                 `json:"words,omitempty"`
 	AutoHighlightsResult AutoHighlightsResponse `json:"auto_highlights_result,omitempty"`
 	IABCategoriesResult  IABCatResponse         `json:"iab_categories_result,omitempty"`
+	Entities             []EntityResponse       `json:"entities,omitempty"`
 }
 
 // Reader returns a bytes.Reader from Request

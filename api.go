@@ -53,7 +53,7 @@ func (c *AssemblyAIClient) sendRequest(req *http.Request, v interface{}) error {
 
 	if res.StatusCode < http.StatusOK || res.StatusCode >= http.StatusBadRequest {
 		if err = json.NewDecoder(res.Body).Decode(&v); err == nil {
-			return errors.New("Unable to decode")
+			return errors.New("unable to decode")
 		}
 
 		return fmt.Errorf("unknown error, status code: %d", res.StatusCode)
