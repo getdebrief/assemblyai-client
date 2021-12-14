@@ -3,7 +3,6 @@ package assemblyai
 import (
 	"bytes"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -59,7 +58,7 @@ func (c *assemblyAIClient) sendRequest(req *http.Request, v interface{}) error {
 
 	if res.StatusCode < http.StatusOK || res.StatusCode >= http.StatusBadRequest {
 		if err = json.NewDecoder(res.Body).Decode(&v); err == nil {
-			return errors.New("unable to decode")
+			return fmt.Errorf("unable to decode %d", res.StatusCode)
 		}
 
 		return fmt.Errorf("unknown error, status code: %d", res.StatusCode)

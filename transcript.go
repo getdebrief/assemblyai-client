@@ -30,7 +30,7 @@ type Request struct {
 	WordBoost       []string       `json:"word_boost,omitempty"`
 	BoostParam      BoostParamType `json:"boost_param,omitempty"`
 	IABCategories   bool           `json:"iab_categories,omitempty"`
-	EntityDetection bool           `json:"entitiy_detection,omitempty"`
+	EntityDetection bool           `json:"entity_detection,omitempty"`
 }
 
 type Timestamp struct {
