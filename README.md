@@ -6,6 +6,9 @@ This is a golang client for the [AssemblyAI API](https://docs.assemblyai.com/ove
 
 ## Version history
 
+### v0.0.7
+* added support for the `entity_detection` feature
+
 ### v0.0.6
 * fixed bug where `AutoHighlight` objects did not grab timestamps
 
